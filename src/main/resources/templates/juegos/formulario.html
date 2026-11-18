@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Formulario de juego</title>
+</head>
+<body>
+<main>
+
+    <h1 class="h3 mb-4" th:text="${juego.id} != null ? 'Editar juego' : 'Nuevo juego'"></h1>
+
+    <form method="post" th:action="@{/juegos/guardar}" th:object="${juego}" class="row g-3">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="col-md-6">
+            <label class="form-label" for="nombre">Nombre del juego</label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}"
+                   th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="desarrollador">Desarrollador</label>
+            <input type="text" class="form-control" id="desarrollador" th:field="*{desarrollador}"
+                   th:classappend="${#fields.hasErrors('desarrollador')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('desarrollador')}" th:errors="*{desarrollador}"></div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="tamanoGb">Tamano (GB)</label>
+            <input type="number" step="0.01" class="form-control" id="tamanoGb" th:field="*{tamanoGb}"
+                   th:classappend="${#fields.hasErrors('tamanoGb')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('tamanoGb')}" th:errors="*{tamanoGb}"></div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="anioCreacion">Anio de creacion</label>
+            <input type="number" class="form-control" id="anioCreacion" th:field="*{anioCreacion}"
+                   th:classappend="${#fields.hasErrors('anioCreacion')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('anioCreacion')}" th:errors="*{anioCreacion}"></div>
+        </div>
+
+        <div class="col-12 mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a class="btn btn-outline-secondary" th:href="@{/juegos}">Cancelar</a>
+        </div>
+
+    </form>
+
+</main>
+</body>
+</html>

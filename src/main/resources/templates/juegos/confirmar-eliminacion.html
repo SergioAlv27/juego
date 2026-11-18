@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Confirmar eliminación</title>
+</head>
+<body>
+<main>
+    <h1 class="h3 mb-4">Confirmar eliminación</h1>
+
+    <p>
+        ¿Seguro que deseas eliminar el juego
+        <strong th:text="${juego.nombre}"></strong>
+        de <strong th:text="${juego.desarrollador}"></strong>?
+    </p>
+
+    <form method="post" th:action="@{/juegos/eliminar/{id}(id=${juego.id})}" class="d-inline">
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    </form>
+    <a class="btn btn-outline-secondary" th:href="@{/juegos}">Cancelar</a>
+</main>
+</body>
+</html>
